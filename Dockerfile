@@ -24,6 +24,6 @@ CMD while sleep $FREQUENCY; do \
     --aws-access-key-id=$AWS_ACCESS_KEY_ID --aws-secret-key=$AWS_SECRET_ACCESS_KEY \
     --mem-util --mem-used --mem-avail \
     --swap-util --swap-used \
-    --aggregated --auto-scaling \
+    --auto-scaling \
     --disk-path=$DISK_PATH --disk-space-util --disk-space-avail --disk-space-used; \
   done

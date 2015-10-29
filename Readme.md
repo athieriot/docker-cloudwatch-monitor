@@ -24,7 +24,6 @@ All metrics are recorded:
       --disk-space-used   Reports allocated disk space in gigabytes.
       --disk-space-avail  Reports available disk space in gigabytes
 
-      --aggregated        Adds aggregated metrics for instance type, AMI id, and region.
       --auto-scaling      Reports Auto Scaling metrics in addition to instance metrics.
 
 By default, metrics will be send once per 60 seconds. This can be change using FREQUENCY variable:
