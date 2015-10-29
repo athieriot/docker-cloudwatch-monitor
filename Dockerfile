@@ -11,7 +11,8 @@ RUN apt-get update && \
 
 RUN wget http://aws-cloudwatch.s3.amazonaws.com/downloads/CloudWatchMonitoringScripts-$CLOUDWATCH_MONITORING_VERSION.zip && \
      unzip CloudWatchMonitoringScripts-$CLOUDWATCH_MONITORING_VERSION.zip && \
-     rm CloudWatchMonitoringScripts-$CLOUDWATCH_MONITORING_VERSION.zip
+     rm CloudWatchMonitoringScripts-$CLOUDWATCH_MONITORING_VERSION.zip && \
+     sed -i "s#df -k -l -P#df -k -P#g" aws-scripts-mon/mon-put-instance-data.pl
 
 WORKDIR aws-scripts-mon
 
