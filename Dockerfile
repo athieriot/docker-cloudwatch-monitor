@@ -16,14 +16,11 @@ RUN wget http://aws-cloudwatch.s3.amazonaws.com/downloads/CloudWatchMonitoringSc
 
 WORKDIR aws-scripts-mon
 
+COPY run.sh .
+
 ENV FREQUENCY=60
 ENV DISK_PATH=/etc/hosts
 
 CMD while sleep $FREQUENCY; do \
-    ./mon-put-instance-data.pl \
-    --aws-access-key-id=$AWS_ACCESS_KEY_ID --aws-secret-key=$AWS_SECRET_ACCESS_KEY \
-    --mem-util --mem-used --mem-avail \
-    --swap-util --swap-used \
-    --auto-scaling \
-    --disk-path=$DISK_PATH --disk-space-util --disk-space-avail --disk-space-used; \
+    ./run.sh; \
   done
