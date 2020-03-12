@@ -19,7 +19,7 @@ To run with an AWS Credentials replace AWS_IAM_ROLE with AWS_ACCESS_KEY_ID and A
         --name=cloudwatch-monitor \
         athieriot/cloudwatch-monitor
 
-All metrics are recorded:
+By default the following metrics are recorded:
 
       --mem-util          Reports memory utilization in percentages.
       --mem-used          Reports memory used in megabytes.
@@ -33,7 +33,14 @@ All metrics are recorded:
       --disk-space-used   Reports allocated disk space in gigabytes.
       --disk-space-avail  Reports available disk space in gigabytes
 
-      --auto-scaling      Reports Auto Scaling metrics in addition to instance metrics.
+Optionally include auto scaling metrics (requires additional AWS permissions):
+
+      docker run -d \
+        -e AWS_IAM_ROLE=<AWS IAM Role> \
+        -e AUTO_SCALING=true \
+        --name=cloudwatch-monitor \
+        athieriot/cloudwatch-monitor
+
 
 By default, metrics will be send once per 60 seconds. This can be change using FREQUENCY variable:
 
