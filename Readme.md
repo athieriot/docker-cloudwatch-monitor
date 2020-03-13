@@ -4,13 +4,22 @@ Docker container that will periodically send EC2 instance metrics to Amazon Clou
 
 Usage:
 
+Run with an AWS IAM Role:
+
+      docker run -d \
+        -e AWS_IAM_ROLE=<AWS IAM Role> \
+        --name=cloudwatch-monitor \
+        athieriot/cloudwatch-monitor
+
+To run with an AWS Credentials replace AWS_IAM_ROLE with AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY:
+
       docker run -d \
         -e AWS_ACCESS_KEY_ID=<Amazon Key> \
         -e AWS_SECRET_ACCESS_KEY=<Amazon secret> \
         --name=cloudwatch-monitor \
         athieriot/cloudwatch-monitor
 
-All metrics are recorded:
+By default the following metrics are recorded:
 
       --mem-util          Reports memory utilization in percentages.
       --mem-used          Reports memory used in megabytes.
@@ -26,12 +35,20 @@ All metrics are recorded:
 
       --auto-scaling      Reports Auto Scaling metrics in addition to instance metrics.
 
+Optionally disable auto scaling metrics (requiring less AWS permissions):
+
+      docker run -d \
+        -e AWS_IAM_ROLE=<AWS IAM Role> \
+        -e AUTO_SCALING=true \
+        --name=cloudwatch-monitor \
+        athieriot/cloudwatch-monitor
+
+
 By default, metrics will be send once per 60 seconds. This can be change using FREQUENCY variable:
 
       docker run -d \
         -e FREQUENCY=120 \
-        -e AWS_ACCESS_KEY_ID=<Amazon Key> \
-        -e AWS_SECRET_ACCESS_KEY=<Amazon secret> \
+        -e AWS_IAM_ROLE=<AWS IAM Role> \
         --name=cloudwatch-monitor \
         athieriot/cloudwatch-monitor
 
@@ -39,8 +56,7 @@ The disk space and usage will be the one of the host machine. This can be config
 
       docker run -d \
         -e DISK_PATH=/media/disk \
-        -e AWS_ACCESS_KEY_ID=<Amazon Key> \
-        -e AWS_SECRET_ACCESS_KEY=<Amazon secret> \
+        -e AWS_IAM_ROLE=<AWS IAM Role> \
         --name=cloudwatch-monitor \
         athieriot/cloudwatch-monitor
 
