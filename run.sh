@@ -15,7 +15,7 @@ if [[ -v AWS_SECRET_ACCESS_KEY ]]; then
   CMD="$CMD --aws-secret-key=$AWS_SECRET_ACCESS_KEY"
 fi
 
-if [[ -v AUTO_SCALING ]] && [ $AUTO_SCALING = true ]; then
+if [[ -z $AUTO_SCALING ]] || [ $AUTO_SCALING = true ]; then
   CMD="$CMD --auto-scaling"
 fi
 
